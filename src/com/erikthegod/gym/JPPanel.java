@@ -23,7 +23,7 @@ public class JPPanel extends javax.swing.JPanel {
         try {
             initComponents();
             per.recogerPersonas();
-            eje.recogerEjercicios();
+            ejer.recogerEjercicios();
             for (int i = 0; i < Ejercicios.ejercicios.size(); i++) {
                 jcbEjercicios.addItem(Ejercicios.ejercicios.get(i).getNombre());
             }
@@ -36,7 +36,7 @@ public class JPPanel extends javax.swing.JPanel {
     }
     Calculator cal = new Calculator();
     Personas per = new Personas();
-    Ejercicios eje = new Ejercicios();
+    Ejercicios ejer = new Ejercicios();
 
     /**
      * This method is called from within the constructor to initialize the form.

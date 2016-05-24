@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Ejercicios {
 
     private String nombre;
-    private  ArrayList <Series> series = new ArrayList();
+    private ArrayList<Series> seriesEjercicios = new ArrayList();
     GestorBBDD gest = new GestorBBDD();
     public static Ejercicios ej;
     public static ArrayList<Ejercicios> ejercicios = new ArrayList();
@@ -26,12 +26,11 @@ public class Ejercicios {
 
     public Ejercicios(String nombre, ArrayList serie) {
         this.nombre = nombre;
-        this.series = serie;               
+        this.seriesEjercicios = serie;
     }
-    
 
     Ejercicios() {
-        
+
     }
 
     public void recogerEjercicios() throws ClassNotFoundException, SQLException {
@@ -50,8 +49,7 @@ public class Ejercicios {
     }
 
     public ArrayList<Series> getSeries() {
-        return series;
+        return seriesEjercicios;
     }
-    
-    
+
 }

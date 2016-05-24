@@ -5,7 +5,6 @@
  */
 package com.erikthegod.gym;
 
-import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class Rutina {
         try {
             for (int i = 0; i < ejerciciosRutina.size(); i++) {
                 for (int x = 0; x < ejerciciosRutina.get(i).getSeries().size(); x++) {
-                    gest.sql = "insert into Rutinas values ('" + nombreRutina + "','" + ejerciciosRutina.get(i).getNombre() + "'," + x + "," + ejerciciosRutina.get(i).getSeries().get(x).repeticiones + ");";
+                    gest.sql = "insert into Rutinas values ('" + nombreRutina + "','" + ejerciciosRutina.get(i).getNombre() + "'," + x + "," + ejerciciosRutina.get(i).getSeries().get(x).repeticiones +","+ejerciciosRutina.get(i).getSeries().get(x).rmSerie+");";
                     System.out.println(gest.sql);
                     gest.stmt.executeUpdate(gest.sql);
                 }

@@ -24,12 +24,14 @@ public class JPPanel2 extends javax.swing.JPanel {
     String nombreRutina;
     String nombreEjercicio;
     int repeticiones;
+    int rmSer;
     Rutina rut = new Rutina();
     Ejercicios eje = new Ejercicios();
     Series ser;
-    ArrayList<Series> series = new ArrayList();
+    ArrayList <Series> series ;
 
     public JPPanel2() {
+        series = new ArrayList();
         try {
             initComponents();
             eje.recogerEjercicios();
@@ -56,7 +58,7 @@ public class JPPanel2 extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jtfRutina = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jbAniadir = new javax.swing.JButton();
+        jbAniadirEjercicio = new javax.swing.JButton();
         jsRepeticiones = new javax.swing.JSpinner();
         jcbRM = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -75,10 +77,10 @@ public class JPPanel2 extends javax.swing.JPanel {
 
         jLabel4.setText("Rutina");
 
-        jbAniadir.setText("Añadir Ejercicio");
-        jbAniadir.addActionListener(new java.awt.event.ActionListener() {
+        jbAniadirEjercicio.setText("Añadir Ejercicio");
+        jbAniadirEjercicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAniadirActionPerformed(evt);
+                jbAniadirEjercicioActionPerformed(evt);
             }
         });
 
@@ -113,7 +115,7 @@ public class JPPanel2 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAniadir)
+                                .addComponent(jbAniadirEjercicio)
                                 .addGap(78, 78, 78))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,25 +158,26 @@ public class JPPanel2 extends javax.swing.JPanel {
                 .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAniadir)
+                    .addComponent(jbAniadirEjercicio)
                     .addComponent(jbCrearRutina))
                 .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAniadirActionPerformed
+    private void jbAniadirEjercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAniadirEjercicioActionPerformed
         // TODO add your handling code here:
-        nombreEjercicio = (String) jcbEjercicios.getSelectedItem();
-        nombreRutina = jtfRutina.getText();
+        nombreEjercicio = (String) jcbEjercicios.getSelectedItem();        
         eje = new Ejercicios(nombreEjercicio, series);
         rut.ejerciciosRutina.add(eje);
-        series.clear();
-    }//GEN-LAST:event_jbAniadirActionPerformed
+        series = new ArrayList();
+    }//GEN-LAST:event_jbAniadirEjercicioActionPerformed
 
     private void jbCrearRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearRutinaActionPerformed
         try {
             // TODO add your handling code here:
+            nombreRutina = jtfRutina.getText();
             rut.crearRutina(jtfRutina.getText());
+            rut.ejerciciosRutina.clear();
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,7 +186,9 @@ public class JPPanel2 extends javax.swing.JPanel {
     private void jbAniadirSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAniadirSerieActionPerformed
         // TODO add your handling code here:
         repeticiones = (int) jsRepeticiones.getValue();
-        ser = new Series(repeticiones);
+        rmSer =  parseInt((String) jcbRM.getSelectedItem());
+        System.out.println(rmSer);
+        ser = new Series(repeticiones,rmSer);
         series.add(ser);
     }//GEN-LAST:event_jbAniadirSerieActionPerformed
 
@@ -193,7 +198,7 @@ public class JPPanel2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JButton jbAniadir;
+    private javax.swing.JButton jbAniadirEjercicio;
     private javax.swing.JButton jbAniadirSerie;
     private javax.swing.JButton jbCrearRutina;
     private javax.swing.JComboBox<String> jcbEjercicios;

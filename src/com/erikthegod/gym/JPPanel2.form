@@ -34,7 +34,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jbAniadir" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbAniadirEjercicio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -90,7 +90,7 @@
               <Component id="jtfRutina" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbAniadir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbAniadirEjercicio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbCrearRutina" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -134,12 +134,12 @@
         <Property name="text" type="java.lang.String" value="Rutina"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbAniadir">
+    <Component class="javax.swing.JButton" name="jbAniadirEjercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir Ejercicio"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAniadirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAniadirEjercicioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="jsRepeticiones">

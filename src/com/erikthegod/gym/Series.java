@@ -13,9 +13,10 @@ import java.util.ArrayList;
  */
 public class Series {
     int repeticiones;
+    int rmSerie;
 
-    public Series(int repeticiones) {
+    public Series(int repeticiones, int rmSerie) {
         this.repeticiones = repeticiones;
-    }
-    
+        this.rmSerie = rmSerie;
+    }  
 }
