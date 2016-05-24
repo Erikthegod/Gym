@@ -24,7 +24,7 @@ public class GestorBBDD {
 
     public void conectar() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");//Carga del driver
-        c = DriverManager.getConnection("jdbc:sqlite:C:/Users/kinton/Desktop/GYM.db");
+        c = DriverManager.getConnection("jdbc:sqlite:C:/Users/kinton/Documents/NetBeansProjects/Gym/GYM.db");
         stmt = c.createStatement();
     }
 

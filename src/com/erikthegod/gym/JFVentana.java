@@ -5,6 +5,8 @@
  */
 package com.erikthegod.gym;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author kinton
@@ -17,7 +19,7 @@ public class JFVentana extends javax.swing.JFrame {
     public JFVentana() {
         initComponents();
         this.setTitle("InstaJ1");
-        JPPanel jpVentana = new JPPanel();
+        JPPanel2 jpVentana = new JPPanel2();
         this.getContentPane().add(jpVentana);
         setBounds(100, 100, 600, 600);
         setVisible(true);
@@ -33,6 +35,7 @@ public class JFVentana extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

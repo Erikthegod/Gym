@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Ejercicios {
 
     private String nombre;
+    private  ArrayList <Series> series = new ArrayList();
     GestorBBDD gest = new GestorBBDD();
     public static Ejercicios ej;
     public static ArrayList<Ejercicios> ejercicios = new ArrayList();
@@ -22,6 +23,12 @@ public class Ejercicios {
     Ejercicios(String nombreEjercicio) {
         nombre = nombreEjercicio;
     }
+
+    public Ejercicios(String nombre, ArrayList serie) {
+        this.nombre = nombre;
+        this.series = serie;               
+    }
+    
 
     Ejercicios() {
         
@@ -41,4 +48,10 @@ public class Ejercicios {
     public String getNombre() {
         return nombre;
     }
+
+    public ArrayList<Series> getSeries() {
+        return series;
+    }
+    
+    
 }
