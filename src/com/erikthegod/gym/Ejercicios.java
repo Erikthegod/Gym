@@ -19,6 +19,8 @@ public class Ejercicios {
     GestorBBDD gest = new GestorBBDD();
     public static Ejercicios ej;
     public static ArrayList<Ejercicios> ejercicios = new ArrayList();
+    public static Ejercicios ejercicioRutina;
+    public static ArrayList<Ejercicios> ejerciciosRutina = new ArrayList();
 
     Ejercicios(String nombreEjercicio) {
         nombre = nombreEjercicio;
@@ -40,6 +42,17 @@ public class Ejercicios {
         while (gest.rs.next()) {
             ej = new Ejercicios(gest.rs.getString("Nombre"));
             ejercicios.add(ej);
+        }
+        gest.c.close();
+    }
+
+    public void recogerNombreEjerciciosRutina() throws ClassNotFoundException, SQLException {
+        gest.conectar();
+        gest.sql = "SELECT * from Rutinas ";
+        gest.rs = gest.stmt.executeQuery(gest.sql);
+        while (gest.rs.next()) {
+            ejercicioRutina = new Ejercicios(gest.rs.getString("Ejercicio"));
+            ejerciciosRutina.add(ejercicioRutina);
         }
         gest.c.close();
     }

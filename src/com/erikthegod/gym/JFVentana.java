@@ -19,7 +19,7 @@ public class JFVentana extends javax.swing.JFrame {
     public JFVentana() {
         initComponents();
         this.setTitle("InstaJ1");
-        JPPanel2 jpVentana = new JPPanel2();
+        JPPanelUsarRutina jpVentana = new JPPanelUsarRutina();
         this.getContentPane().add(jpVentana);
         setBounds(100, 100, 600, 600);
         setVisible(true);

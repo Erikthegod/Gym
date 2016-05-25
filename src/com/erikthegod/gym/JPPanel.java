@@ -159,7 +159,7 @@ public class JPPanel extends javax.swing.JPanel {
     private void jbObtenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerActionPerformed
         try {
             // TODO add your handling code here:
-            cal.recogerEjercicios((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
+            cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error");
         } catch (SQLException ex) {

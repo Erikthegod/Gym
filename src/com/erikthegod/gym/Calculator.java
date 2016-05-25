@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,7 @@ import static java.lang.Integer.parseInt;
 public class Calculator {
 
     GestorBBDD gest = new GestorBBDD();
+    ArrayList <Integer> cantSeries = new ArrayList();
     int porcentajeRM;
     String numeroRepes;
     double velocidad;
@@ -29,7 +31,7 @@ public class Calculator {
     String fecha;
     double pesoPedido;
 
-    public void recogerEjercicios(String ejercicio, String segundos, String peso, int rm, String persona) throws ClassNotFoundException, SQLException {
+    public double calculoTotal(String ejercicio, String segundos, String peso, int rm, String persona) throws ClassNotFoundException, SQLException {
         gest.conectar();
         recogerMetros(ejercicio, persona);
         calcularVelocidad(metros, segundos);       
@@ -39,9 +41,15 @@ public class Calculator {
         recogerRM(ejercicio, velocidad);
         calcularPeso(rm, porcentajeRM, peso);
         calcularRepMax(rm, ejercicio);
-        JOptionPane.showMessageDialog(null, "Peso: " + Math.rint(pesoPedido * 100) / 100 + " Numero Repeticiones: " + numeroRepes);
+        JOptionPane.showMessageDialog(null, "Peso: " + Math.rint(pesoPedido * 100) / 100 + " Numero Repeticiones: " + numeroRepes);       
         gest.c.close();
+        return pesoPedido;
     }
+    
+ 
+        
+        
+            
 
     public void compararEjercicio(String ejercicio) {
         if (ejercicio.compareTo("PressBanca") == 0) {
@@ -149,4 +157,5 @@ public class Calculator {
         }
         return numeroRepes;
     }
+    
 }
