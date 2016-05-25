@@ -41,7 +41,7 @@ public class Calculator {
         recogerRM(ejercicio, velocidad);
         calcularPeso(rm, porcentajeRM, peso);
         calcularRepMax(rm, ejercicio);
-        JOptionPane.showMessageDialog(null, "Peso: " + Math.rint(pesoPedido * 100) / 100 + " Numero Repeticiones: " + numeroRepes);       
+        //JOptionPane.showMessageDialog(null, "Peso: " + Math.rint(pesoPedido * 100) / 100 + " Numero Repeticiones: " + numeroRepes);       
         gest.c.close();
         return pesoPedido;
     }

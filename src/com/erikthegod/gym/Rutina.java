@@ -14,13 +14,23 @@ import java.util.ArrayList;
  */
 public class Rutina {
 
+    private String nombre;
     GestorBBDD gest = new GestorBBDD();
     public ArrayList<Ejercicios> ejerciciosRutina = new ArrayList();
     public ArrayList<Ejercicios> ejerciciosRecogidos;
     public ArrayList<Series> series = new ArrayList();
+    public static ArrayList<Rutina> nombresRutinas = new ArrayList();
+    public static Rutina nombreRutina;
     Series serie;
     Ejercicios ejer;
-    String nombreRutina;
+
+    public Rutina(String nombre) {
+        this.nombre = nombre;
+    }
+
+    Rutina() {
+        
+    }
 
     public void crearRutina(String nombreRutina) throws SQLException, ClassNotFoundException {
         gest.conectar();
@@ -37,6 +47,17 @@ public class Rutina {
         gest.c.close();
     }
 
+    public void recogerNombreRutina() throws ClassNotFoundException, SQLException {
+        gest.conectar();
+
+        gest.sql = "SELECT * from Rutinas";
+        gest.rs = gest.stmt.executeQuery(gest.sql);
+        while (gest.rs.next()) {
+            nombreRutina = new Rutina(gest.rs.getString("Nombre"));
+            nombresRutinas.add(nombreRutina);
+        }
+    }
+
     public Ejercicios recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
         gest.conectar();
         ejerciciosRecogidos = new ArrayList();
@@ -49,4 +70,9 @@ public class Rutina {
         ejer = new Ejercicios(ejercicio, series);
         return ejer;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
 }
