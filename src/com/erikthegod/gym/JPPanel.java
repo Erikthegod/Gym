@@ -19,9 +19,12 @@ public class JPPanel extends javax.swing.JPanel {
     /**
      * Creates new form JPPanel
      */
-    public JPPanel() {
+    private JFVentana jfe;
+
+    public JPPanel(JFVentana _jfe) {
         try {
             initComponents();
+            this.jfe = _jfe;
             per.recogerPersonas();
             ejer.recogerEjercicios();
             for (int i = 0; i < Ejercicios.ejercicios.size(); i++) {
@@ -79,8 +82,18 @@ public class JPPanel extends javax.swing.JPanel {
         jLabel1.setText("Porcentaje RM deseado");
 
         jbCrearRut.setText("Crear Rutina");
+        jbCrearRut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearRutActionPerformed(evt);
+            }
+        });
 
         jbUsarRutina.setText("Usar Rutina");
+        jbUsarRutina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbUsarRutinaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -159,7 +172,7 @@ public class JPPanel extends javax.swing.JPanel {
     private void jbObtenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerActionPerformed
         try {
             // TODO add your handling code here:
-            cal.insertarDato((String) jcbEjercicios.getSelectedItem(), (String) jcbNombre.getSelectedItem(), jtfPeso.getText(),jtfSegundos.getText());
+            cal.insertarDato((String) jcbEjercicios.getSelectedItem(), (String) jcbNombre.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
             cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error");
@@ -171,6 +184,16 @@ public class JPPanel extends javax.swing.JPanel {
     private void jtfPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPesoActionPerformed
+
+    private void jbCrearRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearRutActionPerformed
+        // TODO add your handling code here:
+        this.jfe.cambiaPanel("p2");
+    }//GEN-LAST:event_jbCrearRutActionPerformed
+
+    private void jbUsarRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsarRutinaActionPerformed
+        // TODO add your handling code here:
+        this.jfe.cambiaPanel("p3");
+    }//GEN-LAST:event_jbUsarRutinaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

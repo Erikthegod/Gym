@@ -16,11 +16,16 @@ public class JFVentana extends javax.swing.JFrame {
     /**
      * Creates new form JFVentana
      */
+    JPPanel panel = new JPPanel(this);
+    JPPanel2 panel2 = new JPPanel2(this);
+    JPPanelUsarRutina panel3 = new JPPanelUsarRutina(this);
+
     public JFVentana() {
         initComponents();
-        this.setTitle("InstaJ1");
-        JPPanelUsarRutina jpVentana = new JPPanelUsarRutina();
-        this.getContentPane().add(jpVentana);
+        this.setTitle("KintAPP");
+        this.getContentPane().add(panel, "p1");
+        this.getContentPane().add(panel2, "p2");
+        this.getContentPane().add(panel3, "p3");
         setBounds(100, 100, 600, 600);
         setVisible(true);
     }
@@ -74,6 +79,12 @@ public class JFVentana extends javax.swing.JFrame {
             }
         });
     }
+
+    protected void cambiaPanel(String nombrePanel) {
+        CardLayout c = (CardLayout) (getContentPane().getLayout());
+        c.show(getContentPane(), nombrePanel);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

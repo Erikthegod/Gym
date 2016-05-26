@@ -168,11 +168,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Rutina"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCrearRutActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbUsarRutina">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usar Rutina"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbUsarRutinaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

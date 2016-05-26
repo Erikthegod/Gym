@@ -5,6 +5,7 @@
  */
 package com.erikthegod.gym;
 
+import static com.erikthegod.gym.JPPanelUsarRutina.jcbRutina;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class JPPanel2 extends javax.swing.JPanel {
     /**
      * Creates new form JPPanel2
      */
+    private JFVentana jfe;
     String nombreRutina;
     String nombreEjercicio;
     int repeticiones;
@@ -30,16 +32,12 @@ public class JPPanel2 extends javax.swing.JPanel {
     Series ser;
     ArrayList <Series> series ;
 
-    public JPPanel2() {
+    public JPPanel2(JFVentana _jfe) {
+        this.jfe = _jfe;
         series = new ArrayList();
-        try {
-            initComponents();
-            eje.recogerEjercicios();
-            for (int i = 0; i < Ejercicios.ejercicios.size(); i++) {
-                jcbEjercicios.addItem(Ejercicios.ejercicios.get(i).getNombre());
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error conectar");
+        initComponents();
+        for (int i = 0; i < Ejercicios.ejercicios.size(); i++) {
+            jcbEjercicios.addItem(Ejercicios.ejercicios.get(i).getNombre());
         }
     }
 
@@ -63,6 +61,7 @@ public class JPPanel2 extends javax.swing.JPanel {
         jcbRM = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jbAniadirSerie = new javax.swing.JButton();
+        jbUsarRutina = new javax.swing.JButton();
 
         jbCrearRutina.setText("Crear Rutina");
         jbCrearRutina.addActionListener(new java.awt.event.ActionListener() {
@@ -95,42 +94,54 @@ public class JPPanel2 extends javax.swing.JPanel {
             }
         });
 
+        jbUsarRutina.setText("Usar Rutina");
+        jbUsarRutina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbUsarRutinaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel1)
-                .addGap(129, 129, 129)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jsRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCrearRutina))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAniadirEjercicio)
-                                .addGap(78, 78, 78))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(231, 231, 231))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(255, 255, 255))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(198, 198, 198))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(248, 248, 248))))
+                        .addGap(113, 113, 113)
+                        .addComponent(jbCrearRutina))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
+                        .addGap(25, 25, 25)
+                        .addComponent(jbUsarRutina)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbAniadirEjercicio)
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(231, 231, 231))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(255, 255, 255))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(248, 248, 248))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jsRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
                         .addComponent(jcbRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbAniadirSerie)
@@ -139,9 +150,11 @@ public class JPPanel2 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jbUsarRutina))
+                .addGap(22, 22, 22)
                 .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -178,6 +191,7 @@ public class JPPanel2 extends javax.swing.JPanel {
             nombreRutina = jtfRutina.getText();
             rut.crearRutina(jtfRutina.getText());
             rut.ejerciciosRutina.clear();
+            
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,6 +206,23 @@ public class JPPanel2 extends javax.swing.JPanel {
         series.add(ser);
     }//GEN-LAST:event_jbAniadirSerieActionPerformed
 
+    private void jbUsarRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsarRutinaActionPerformed
+        try {
+            // TODO add your handling code here:
+            Rutina.nombresRutinas.clear();
+            JPPanelUsarRutina.jcbRutina.removeAllItems();
+            rut.recogerNombreRutina();
+            for (int i = 0; i < Rutina.nombresRutinas.size(); i++) {
+                JPPanelUsarRutina.jcbRutina.addItem(Rutina.nombresRutinas.get(i).getNombre());
+            }
+            this.jfe.cambiaPanel("p3");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbUsarRutinaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -201,6 +232,7 @@ public class JPPanel2 extends javax.swing.JPanel {
     private javax.swing.JButton jbAniadirEjercicio;
     private javax.swing.JButton jbAniadirSerie;
     private javax.swing.JButton jbCrearRutina;
+    private javax.swing.JButton jbUsarRutina;
     private javax.swing.JComboBox<String> jcbEjercicios;
     private javax.swing.JComboBox<String> jcbRM;
     private javax.swing.JSpinner jsRepeticiones;

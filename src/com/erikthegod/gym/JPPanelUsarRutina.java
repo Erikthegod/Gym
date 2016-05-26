@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,16 +20,17 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
     /**
      * Creates new form JPPanelUsarRutina
      */
+    private JFVentana jfe;
     Vector vNombres;
     DefaultTableModel dtm;
     double pesoDeseado;
     Personas per = new Personas();
     Ejercicios ejer = new Ejercicios();
 
-    public JPPanelUsarRutina() {
+    public JPPanelUsarRutina(JFVentana _jfe) {
         try {
             initComponents();
-
+            this.jfe = _jfe;
             vNombres = new Vector();
             vNombres.add("Serie");
             vNombres.add("RM");
@@ -39,7 +39,6 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
             dtm = new DefaultTableModel(vNombres, 0);
             jtSeries.setModel(dtm);
             initComponents();
-            per.recogerPersonas();
             rut.recogerNombreRutina();
             for (int i = 0; i < Rutina.nombresRutinas.size(); i++) {
                 jcbRutina.addItem(Rutina.nombresRutinas.get(i).getNombre());
@@ -47,7 +46,6 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
             for (int i = 0; i < Personas.personas.size(); i++) {
                 jcbPersona.addItem(Personas.personas.get(i).getNombre());
             }
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPPanelUsarRutina.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -76,6 +74,7 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
         jtSeries = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jbSalir = new javax.swing.JButton();
 
         jcbRutina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +106,13 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
 
         jLabel2.setText("Peso");
 
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,9 +120,6 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbRutina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,15 +134,22 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
                                         .addGap(18, 18, 18))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(37, 37, 37)))
+                                        .addGap(23, 23, 23)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfSegundos, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                                    .addComponent(jtfSegundos, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                                     .addComponent(jtfPeso))
                                 .addGap(24, 24, 24))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addComponent(jbCalcular)
-                                .addContainerGap(134, Short.MAX_VALUE))))))
+                                .addContainerGap(134, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbSalir))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,14 +170,18 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addContainerGap())
         );
+
+        jcbRutina.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
         try {
             // TODO add your handling code here:
-            cal.insertarDato((String) jcbEjercicio.getSelectedItem(), (String) jcbPersona.getSelectedItem(), jtfPeso.getText(),jtfSegundos.getText());
+            cal.insertarDato((String) jcbEjercicio.getSelectedItem(), (String) jcbPersona.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
             dtm = new DefaultTableModel(vNombres, 0);
             jtSeries.setModel(dtm);
             rut.recogerEjercicioRutina((String) jcbRutina.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
@@ -189,10 +203,12 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
     private void jcbRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRutinaActionPerformed
         try {
             // TODO add your handling code here:
+            jcbEjercicio.removeAllItems();
             ejer.recogerNombreEjerciciosRutina((String) jcbRutina.getSelectedItem());
             for (int i = 0; i < Ejercicios.ejerciciosRutina.size(); i++) {
                 jcbEjercicio.addItem(Ejercicios.ejerciciosRutina.get(i).getNombre());
             }
+            Ejercicios.ejerciciosRutina.clear();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPPanelUsarRutina.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -200,15 +216,21 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jcbRutinaActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        this.jfe.cambiaPanel("p1");
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCalcular;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbEjercicio;
     private javax.swing.JComboBox<String> jcbPersona;
-    private javax.swing.JComboBox<String> jcbRutina;
+    protected static javax.swing.JComboBox<String> jcbRutina;
     private javax.swing.JTable jtSeries;
     private javax.swing.JTextField jtfPeso;
     private javax.swing.JTextField jtfSegundos;
