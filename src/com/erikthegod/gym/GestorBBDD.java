@@ -21,10 +21,11 @@ public class GestorBBDD {
     public Statement stmt = null;//Sentencia
     public String sql = null;//Cadena con la sentencia sql
     public ResultSet rs = null;//Conjunto de resultados
+    public static final String URL_CASA="jdbc:sqlite:C:/Users/kinton/Documents/NetBeansProjects/Gym/GYM.db";
 
     public void conectar() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");//Carga del driver
-        c = DriverManager.getConnection("jdbc:sqlite:E:/Proyectos/GYM/Gym/GYM.db");
+        c = DriverManager.getConnection(URL_CASA);
         stmt = c.createStatement();
     }
 

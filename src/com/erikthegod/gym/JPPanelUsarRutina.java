@@ -32,9 +32,10 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
             initComponents();
 
             vNombres = new Vector();
-            vNombres.add("Categoria");
-            vNombres.add("Producto");
-            vNombres.add("Precio");
+            vNombres.add("Serie");
+            vNombres.add("RM");
+            vNombres.add("Repeticiones");
+            vNombres.add("Peso");
             dtm = new DefaultTableModel(vNombres, 0);
             jtSeries.setModel(dtm);
             initComponents();
@@ -166,16 +167,19 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
     private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
         try {
             // TODO add your handling code here:
+            cal.insertarDato((String) jcbEjercicio.getSelectedItem(), (String) jcbPersona.getSelectedItem(), jtfPeso.getText(),jtfSegundos.getText());
             dtm = new DefaultTableModel(vNombres, 0);
             jtSeries.setModel(dtm);
             rut.recogerEjercicioRutina((String) jcbRutina.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
             for (int i = 0; i < rut.ejer.getSeries().size(); i++) {
                 pesoDeseado = cal.calculoTotal(rut.ejer.getNombre(), jtfSegundos.getText(), jtfPeso.getText(), rut.ejer.getSeries().get(i).rmSerie, (String) jcbPersona.getSelectedItem());
                 dtm.setRowCount(dtm.getRowCount() + 1);
-                jtSeries.setValueAt(i, i, 0);
+                jtSeries.setValueAt(i + 1, i, 0);
                 jtSeries.setValueAt(rut.ejer.getSeries().get(i).rmSerie, i, 1);
-                jtSeries.setValueAt(pesoDeseado, i, 2);
+                jtSeries.setValueAt(rut.ejer.getSeries().get(i).repeticiones, i, 2);
+                jtSeries.setValueAt(pesoDeseado, i, 3);
             }
+            rut.ejer.getSeries().clear();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(JPPanelUsarRutina.class.getName()).log(Level.SEVERE, null, ex);
         }

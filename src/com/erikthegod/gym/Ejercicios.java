@@ -48,7 +48,7 @@ public class Ejercicios {
 
     public void recogerNombreEjerciciosRutina(String nombreRutina) throws ClassNotFoundException, SQLException {
         gest.conectar();
-        gest.sql = "SELECT * from Rutinas where Nombre = '"+ nombreRutina+"'";
+        gest.sql = "SELECT distinct Ejercicio from Rutinas where Nombre = '"+ nombreRutina+"'";
         gest.rs = gest.stmt.executeQuery(gest.sql);
         while (gest.rs.next()) {
             ejercicioRutina = new Ejercicios(gest.rs.getString("Ejercicio"));

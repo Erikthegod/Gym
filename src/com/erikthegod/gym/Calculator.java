@@ -5,13 +5,9 @@
  */
 package com.erikthegod.gym;
 
-import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 
@@ -22,34 +18,25 @@ import java.util.ArrayList;
 public class Calculator {
 
     GestorBBDD gest = new GestorBBDD();
-    ArrayList <Integer> cantSeries = new ArrayList();
+    ArrayList<Integer> cantSeries = new ArrayList();
     int porcentajeRM;
     String numeroRepes;
     double velocidad;
-    String metros;
+    double metros;
     Calendar c2 = new GregorianCalendar();
     String fecha;
     double pesoPedido;
 
     public double calculoTotal(String ejercicio, String segundos, String peso, int rm, String persona) throws ClassNotFoundException, SQLException {
         gest.conectar();
-        recogerMetros(ejercicio, persona);
-        calcularVelocidad(metros, segundos);       
+        calcularVelocidad(recogerMetros(ejercicio, persona), segundos);
         compararEjercicio(ejercicio);
-        fecha = Integer.toString(c2.get(Calendar.DAY_OF_MONTH))+"-"+(Integer.toString(c2.get(Calendar.MONTH)+1));
-        insertarDato(ejercicio, persona, peso, fecha);       
         recogerRM(ejercicio, velocidad);
         calcularPeso(rm, porcentajeRM, peso);
         calcularRepMax(rm, ejercicio);
-        //JOptionPane.showMessageDialog(null, "Peso: " + Math.rint(pesoPedido * 100) / 100 + " Numero Repeticiones: " + numeroRepes);       
         gest.c.close();
-        return pesoPedido;
+        return calcularPeso(rm, porcentajeRM, peso);
     }
-    
- 
-        
-        
-            
 
     public void compararEjercicio(String ejercicio) {
         if (ejercicio.compareTo("PressBanca") == 0) {
@@ -103,53 +90,51 @@ public class Calculator {
             }
         }
     }
-    
-    public void insertarDato(String ejercicio,String persona,String peso,String fecha){
-        try {
-            gest.sql = "insert into Datos values ('"+ejercicio+"','"+persona+"',"+parseInt(peso)+","+velocidad+",'"+fecha+"');";
-            System.out.println(gest.sql);
-            gest.stmt.executeUpdate(gest.sql);
-        } catch (SQLException ex) {
-            System.out.println("error");
-        }
+
+    public void insertarDato(String ejercicio, String persona, String peso, String segundos) throws ClassNotFoundException, SQLException {
+        gest.conectar();
+        fecha = Integer.toString(c2.get(Calendar.DAY_OF_MONTH)) + "-" + (Integer.toString(c2.get(Calendar.MONTH) + 1));
+        gest.sql = "insert into Datos values ('" + ejercicio + "','" + persona + "'," + parseInt(peso) + "," + calcularVelocidad(recogerMetros(ejercicio, persona), segundos) + ",'" + fecha + "');";
+        System.out.println(gest.sql);
+        gest.stmt.executeUpdate(gest.sql);
     }
-    
-    public void recogerMetros(String ejercicio,String persona) throws SQLException{
+
+    public Double recogerMetros(String ejercicio, String persona) throws SQLException {
         gest.sql = "SELECT * from Medidas where Persona = '" + persona + "' and Ejercicio =  '" + ejercicio + "'";
         gest.rs = gest.stmt.executeQuery(gest.sql);
         while (gest.rs.next()) {
-            metros = gest.rs.getString("Metros");
-            System.out.println(metros);
+            metros = Double.valueOf(gest.rs.getString("Metros"));
         }
+        return metros;
     }
-    
-    public double calcularVelocidad(String metros,String segundos){
-        velocidad = Double.valueOf(metros) / Double.valueOf(segundos);
-        return velocidad;
+
+    public double calcularVelocidad(double metros, String segundos) {
+        velocidad = metros / Double.valueOf(segundos);
+        return Math.rint(velocidad * 100) / 100;
     }
-    
-    public void recogerRM(String ejercicio,double velocidad) throws SQLException{
+
+    public void recogerRM(String ejercicio, double velocidad) throws SQLException {
         gest.sql = "SELECT * from Ejercicios where Velocidad =" + velocidad + " and Nombre = '" + ejercicio + "';";
         gest.rs = gest.stmt.executeQuery(gest.sql);
         while (gest.rs.next()) {
             porcentajeRM = gest.rs.getInt("PorcentajeRM");
-            JOptionPane.showMessageDialog(null, porcentajeRM);
         }
     }
-    
+
     /**
      * Calcula el peso del rm deseado con un rm dado y el peso de ese rm dado
+     *
      * @param rm Rm deseado
      * @param porcenajeRM Rm del peso dado
      * @param peso Peso dado
      * @return Peso deseado
      */
-    public double calcularPeso(int rm,int porcenajeRM,String peso){
+    public double calcularPeso(int rm, int porcenajeRM, String peso) {
         pesoPedido = (rm * Double.valueOf(peso)) / porcentajeRM;
         return pesoPedido;
     }
-    
-    public String calcularRepMax(int rm,String ejercicio) throws SQLException{
+
+    public String calcularRepMax(int rm, String ejercicio) throws SQLException {
         gest.sql = "SELECT * from Ejercicios where PorcentajeRM =" + rm + " and Nombre='" + ejercicio + "';";
         gest.rs = gest.stmt.executeQuery(gest.sql);
         while (gest.rs.next()) {
@@ -157,5 +142,5 @@ public class Calculator {
         }
         return numeroRepes;
     }
-    
+
 }

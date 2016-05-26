@@ -50,7 +50,7 @@ public class Rutina {
     public void recogerNombreRutina() throws ClassNotFoundException, SQLException {
         gest.conectar();
 
-        gest.sql = "SELECT * from Rutinas";
+        gest.sql = "select distinct Nombre from Rutinas";
         gest.rs = gest.stmt.executeQuery(gest.sql);
         while (gest.rs.next()) {
             nombreRutina = new Rutina(gest.rs.getString("Nombre"));
@@ -58,7 +58,7 @@ public class Rutina {
         }
     }
 
-    public Ejercicios recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
+    public void recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
         gest.conectar();
         ejerciciosRecogidos = new ArrayList();
         gest.sql = "SELECT * from Rutinas where Nombre = '" + nombreRutina + "' and Ejercicio =  '" + ejercicio + "'";
@@ -68,7 +68,6 @@ public class Rutina {
             series.add(serie);
         }
         ejer = new Ejercicios(ejercicio, series);
-        return ejer;
     }
 
     public String getNombre() {
