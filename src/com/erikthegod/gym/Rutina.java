@@ -5,6 +5,7 @@
  */
 package com.erikthegod.gym;
 
+import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class Rutina {
         this.nombre = nombre;
     }
 
-    Rutina() {
+    public Rutina() {
         
     }
 
@@ -37,7 +38,7 @@ public class Rutina {
         try {
             for (int i = 0; i < ejerciciosRutina.size(); i++) {
                 for (int x = 0; x < ejerciciosRutina.get(i).getSeries().size(); x++) {
-                    gest.sql = "insert into Rutinas values ('" + nombreRutina + "','" + ejerciciosRutina.get(i).getNombre() + "'," + x + "," + ejerciciosRutina.get(i).getSeries().get(x).repeticiones + "," + ejerciciosRutina.get(i).getSeries().get(x).rmSerie + ");";
+                    gest.sql = "insert into Rutinas values ('" + nombreRutina + "','" + ejerciciosRutina.get(i).getNombre() + "'," + x + "," + ejerciciosRutina.get(i).getSeries().get(x).getRepeticiones() + "," + ejerciciosRutina.get(i).getSeries().get(x).getRmSerie() + ");";
                     gest.stmt.executeUpdate(gest.sql);
                 }
             }
@@ -58,7 +59,7 @@ public class Rutina {
         }
     }
 
-    public void recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
+    public Ejercicios recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
         gest.conectar();
         ejerciciosRecogidos = new ArrayList();
         gest.sql = "SELECT * from Rutinas where Nombre = '" + nombreRutina + "' and Ejercicio =  '" + ejercicio + "'";
@@ -68,6 +69,7 @@ public class Rutina {
             series.add(serie);
         }
         ejer = new Ejercicios(ejercicio, series);
+        return ejer;
     }
 
     public String getNombre() {

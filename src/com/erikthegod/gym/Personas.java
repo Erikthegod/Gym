@@ -5,6 +5,7 @@
  */
 package com.erikthegod.gym;
 
+import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,11 +19,11 @@ public class Personas {
     public static Personas per;
     public static ArrayList<Personas> personas = new ArrayList();
 
-    Personas(String nombrePersona) {
+    public Personas(String nombrePersona) {
         nombre = nombrePersona;
     }
 
-    Personas() {
+    public Personas() {
         
     }
 

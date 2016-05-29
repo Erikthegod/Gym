@@ -1,5 +1,6 @@
 package com.erikthegod.gym;
 
+import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class Ejercicios {
     public static Ejercicios ejercicioPersona;
     public static ArrayList<Ejercicios> ejerciciosPersona = new ArrayList();
 
-    Ejercicios(String nombreEjercicio) {
+    public Ejercicios(String nombreEjercicio) {
         nombre = nombreEjercicio;
     }
 
@@ -33,7 +34,7 @@ public class Ejercicios {
         this.seriesEjercicios = serie;
     }
 
-    Ejercicios() {
+    public Ejercicios() {
 
     }
 
