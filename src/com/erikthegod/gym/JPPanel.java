@@ -61,6 +61,7 @@ public class JPPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jbCrearRut = new javax.swing.JButton();
         jbUsarRutina = new javax.swing.JButton();
+        jbEstadisticas = new javax.swing.JButton();
 
         jbObtener.setText("Obtener");
         jbObtener.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +96,13 @@ public class JPPanel extends javax.swing.JPanel {
             }
         });
 
+        jbEstadisticas.setText("Estadisticas");
+        jbEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEstadisticasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,6 +123,8 @@ public class JPPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbUsarRutina)
+                        .addGap(38, 38, 38)
+                        .addComponent(jbEstadisticas)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jcbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +157,8 @@ public class JPPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCrearRut)
-                    .addComponent(jbUsarRutina))
+                    .addComponent(jbUsarRutina)
+                    .addComponent(jbEstadisticas))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,10 +206,16 @@ public class JPPanel extends javax.swing.JPanel {
         this.jfe.cambiaPanel("p3");
     }//GEN-LAST:event_jbUsarRutinaActionPerformed
 
+    private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
+        // TODO add your handling code here:
+        this.jfe.cambiaPanel("p4");
+    }//GEN-LAST:event_jbEstadisticasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCrearRut;
+    private javax.swing.JButton jbEstadisticas;
     private javax.swing.JButton jbObtener;
     private javax.swing.JButton jbUsarRutina;
     private javax.swing.JComboBox<String> jcbEjercicios;

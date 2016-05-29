@@ -19,6 +19,7 @@ public class JFVentana extends javax.swing.JFrame {
     JPPanel panel = new JPPanel(this);
     JPPanel2 panel2 = new JPPanel2(this);
     JPPanelUsarRutina panel3 = new JPPanelUsarRutina(this);
+    JPPanelEstadisticas panel4 = new JPPanelEstadisticas(this);
 
     public JFVentana() {
         initComponents();
@@ -26,6 +27,7 @@ public class JFVentana extends javax.swing.JFrame {
         this.getContentPane().add(panel, "p1");
         this.getContentPane().add(panel2, "p2");
         this.getContentPane().add(panel3, "p3");
+        this.getContentPane().add(panel4, "p4");
         setBounds(100, 100, 600, 600);
         setVisible(true);
     }

@@ -21,6 +21,8 @@ public class Ejercicios {
     public static ArrayList<Ejercicios> ejercicios = new ArrayList();
     public static Ejercicios ejercicioRutina;
     public static ArrayList<Ejercicios> ejerciciosRutina = new ArrayList();
+    public static Ejercicios ejercicioPersona;
+    public static ArrayList<Ejercicios> ejerciciosPersona = new ArrayList();
 
     Ejercicios(String nombreEjercicio) {
         nombre = nombreEjercicio;
@@ -53,6 +55,17 @@ public class Ejercicios {
         while (gest.rs.next()) {
             ejercicioRutina = new Ejercicios(gest.rs.getString("Ejercicio"));
             ejerciciosRutina.add(ejercicioRutina);
+        }
+        gest.c.close();
+    }
+    
+    public void recogerEjerciciosPesona(String nombrePersona) throws ClassNotFoundException, SQLException{
+        gest.conectar();
+        gest.sql = "SELECT distinct Ejercicio from Datos where Persona = '"+ nombrePersona+"'";
+        gest.rs = gest.stmt.executeQuery(gest.sql);
+        while (gest.rs.next()) {
+            ejercicioPersona = new Ejercicios(gest.rs.getString("Ejercicio"));
+            ejerciciosPersona.add(ejercicioPersona);
         }
         gest.c.close();
     }
