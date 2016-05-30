@@ -28,6 +28,8 @@ public class GestorBBDD {
     public String sql = null;//Cadena con la sentencia sql
     public ResultSet rs = null;//Conjunto de resultados
     public static final String URL_CASA = "jdbc:sqlite:C:/Users/kinton/Documents/NetBeansProjects/Gym/GYM.db";
+    public static final String URL_CLASE = "jdbc:sqlite:E:/Proyectos/GYM/Gym/GYM.db";
+    
     Calendar c2 = new GregorianCalendar();
 
     private String fecha;
@@ -43,7 +45,7 @@ public class GestorBBDD {
 
     public void conectar() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");//Carga del driver
-        c = DriverManager.getConnection(URL_CASA);
+        c = DriverManager.getConnection(URL_CLASE);
         stmt = c.createStatement();
     }
 
