@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.erikthegod.gym.persistencia;
 
-import com.erikthegod.gym.Calculator;
-import com.erikthegod.gym.Datos;
+import com.erikthegod.gym.modelo.Datos;
+import com.erikthegod.gym.modelo.Ejercicios;
+import com.erikthegod.gym.modelo.Personas;
+import com.erikthegod.gym.modelo.Rutina;
+import com.erikthegod.gym.modelo.Series;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,8 +26,7 @@ public class GestorBBDD {
     public String sql = null;//Cadena con la sentencia sql
     public ResultSet rs = null;//Conjunto de resultados
     public static final String URL_CASA = "jdbc:sqlite:C:/Users/kinton/Documents/NetBeansProjects/Gym/GYM.db";
-    public static final String URL_CLASE = "jdbc:sqlite:E:/Proyectos/GYM/Gym/GYM.db";
-    
+
     Calendar c2 = new GregorianCalendar();
 
     private String fecha;
@@ -38,14 +35,22 @@ public class GestorBBDD {
     private String numeroRepes;
     private double velocidad;
 
-    Datos dato;
-    ArrayList<Datos> datos = new ArrayList();
-    Datos pesoD;
-    ArrayList<Datos> pesos = new ArrayList();
+    private Datos dato;
+    private ArrayList<Datos> datos = new ArrayList();
+    private Datos pesoD;
+    private ArrayList<Datos> pesos = new ArrayList();
+    private Ejercicios ejer;
+    private ArrayList<Ejercicios> ejercicios;
+    private Series serie;
+    private ArrayList<Series> series = new ArrayList();
+    private ArrayList<Rutina> nombresRutinas = new ArrayList();
+    private Rutina nombreRut;
+    private Personas per;
+    private ArrayList<Personas> personas = new ArrayList();
 
     public void conectar() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");//Carga del driver
-        c = DriverManager.getConnection(URL_CLASE);
+        c = DriverManager.getConnection(URL_CASA);
         stmt = c.createStatement();
     }
 
@@ -113,4 +118,92 @@ public class GestorBBDD {
         return pesos;
     }
 
+    public void crearRutina(ArrayList<Ejercicios> ejerciciosRutina, String nombreRutina) throws SQLException, ClassNotFoundException {
+        conectar();
+        try {
+            for (int i = 0; i < ejerciciosRutina.size(); i++) {
+                for (int x = 0; x < ejerciciosRutina.get(i).getSeries().size(); x++) {
+                    sql = "insert into Rutinas values ('" + nombreRutina + "','" + ejerciciosRutina.get(i).getNombre() + "'," + x + "," + ejerciciosRutina.get(i).getSeries().get(x).getRepeticiones() + "," + ejerciciosRutina.get(i).getSeries().get(x).getRmSerie() + ");";
+                    stmt.executeUpdate(sql);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("error");
+        }
+        c.close();
+    }
+
+    public Ejercicios recogerEjercicioRutina(String nombreRutina, String ejercicio) throws ClassNotFoundException, SQLException {
+        conectar();
+        sql = "SELECT * from Rutinas where Nombre = '" + nombreRutina + "' and Ejercicio =  '" + ejercicio + "'";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            serie = new Series(rs.getInt("Repeticiones"), rs.getInt("RM"));
+            series.add(serie);
+        }
+        ejer = new Ejercicios(ejercicio, series);
+        return ejer;
+    }
+
+    public ArrayList<Rutina> recogerNombreRutina() throws ClassNotFoundException, SQLException {
+        conectar();
+        sql = "select distinct Nombre from Rutinas";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            nombreRut = new Rutina(rs.getString("Nombre"));
+            nombresRutinas.add(nombreRut);
+        }
+        return nombresRutinas;
+    }
+
+    public ArrayList<Ejercicios> recogerEjercicios() throws ClassNotFoundException, SQLException {
+        conectar();
+        ejercicios = new ArrayList();
+        sql = "SELECT * from EjerciciosNom";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ejer = new Ejercicios(rs.getString("Nombre"));
+            ejercicios.add(ejer);
+        }
+        c.close();
+        return ejercicios;
+    }
+
+    public ArrayList<Ejercicios> recogerNombreEjerciciosRutina(String nombreRutina) throws ClassNotFoundException, SQLException {
+        conectar();
+        ejercicios = new ArrayList();
+        sql = "SELECT distinct Ejercicio from Rutinas where Nombre = '" + nombreRutina + "'";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ejer = new Ejercicios(rs.getString("Ejercicio"));
+            ejercicios.add(ejer);
+        }
+        c.close();
+        return ejercicios;
+    }
+
+    public ArrayList<Ejercicios> recogerEjerciciosPesona(String nombrePersona) throws ClassNotFoundException, SQLException {
+        conectar();
+        ejercicios = new ArrayList();
+        sql = "SELECT distinct Ejercicio from Datos where Persona = '" + nombrePersona + "'";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            ejer = new Ejercicios(rs.getString("Ejercicio"));
+            ejercicios.add(ejer);
+        }
+        c.close();
+        return ejercicios;
+    }
+
+    public ArrayList<Personas> recogerPersonas() throws ClassNotFoundException, SQLException {
+        conectar();
+        sql = "SELECT * from Personas";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            per = new Personas(rs.getString("Nombre"));
+            personas.add(per);
+        }
+        c.close();
+        return personas;
+    }
 }

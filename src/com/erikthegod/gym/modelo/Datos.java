@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.erikthegod.gym;
+package com.erikthegod.gym.modelo;
 
 import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
