@@ -1,7 +1,5 @@
 package com.erikthegod.gym.modelo;
 
-import com.erikthegod.gym.persistencia.GestorBBDD;
-
 /**
  *
  * @author kinton
@@ -9,7 +7,6 @@ import com.erikthegod.gym.persistencia.GestorBBDD;
 public class Personas {
 
     private String nombre;
-    GestorBBDD gest = new GestorBBDD();
 
     public Personas(String nombrePersona) {
         nombre = nombrePersona;

@@ -9,7 +9,7 @@ import java.awt.CardLayout;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class JFVentana extends javax.swing.JFrame {
 
@@ -17,7 +17,7 @@ public class JFVentana extends javax.swing.JFrame {
      * Creates new form JFVentana
      */
     JPPanel panel = new JPPanel(this);
-    JPPanel2 panel2 = new JPPanel2(this);
+    JPPanelCrearRutina panel2 = new JPPanelCrearRutina(this);
     JPPanelUsarRutina panel3 = new JPPanelUsarRutina(this);
     JPPanelEstadisticas panel4 = new JPPanelEstadisticas(this);
 

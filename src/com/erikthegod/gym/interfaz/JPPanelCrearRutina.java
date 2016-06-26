@@ -14,12 +14,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
-public class JPPanel2 extends javax.swing.JPanel {
+public class JPPanelCrearRutina extends javax.swing.JPanel {
 
     private JFVentana jfe;
     private String nombreRutina;
@@ -36,7 +38,7 @@ public class JPPanel2 extends javax.swing.JPanel {
     private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Rutina> nombresRutinas = new ArrayList();
 
-    public JPPanel2(JFVentana _jfe) {
+    public JPPanelCrearRutina(JFVentana _jfe) {
         try {
             this.jfe = _jfe;
             series = new ArrayList();
@@ -46,9 +48,9 @@ public class JPPanel2 extends javax.swing.JPanel {
                 jcbEjercicios.addItem(ejercicios.get(i).getNombre());
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,23 +121,20 @@ public class JPPanel2 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jbUsarRutina)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbAniadirEjercicio)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(255, 255, 255))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(198, 198, 198))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(248, 248, 248))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jcbEjercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(198, 198, 198))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(248, 248, 248))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,8 +149,14 @@ public class JPPanel2 extends javax.swing.JPanel {
                         .addGap(117, 117, 117)
                         .addComponent(jcbRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbAniadirSerie)
-                        .addGap(42, 42, 42))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbAniadirEjercicio)
+                            .addComponent(jbAniadirSerie))
+                        .addGap(28, 28, 28))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(158, 158, 158))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,35 +176,43 @@ public class JPPanel2 extends javax.swing.JPanel {
                     .addComponent(jsRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbAniadirSerie))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(jbAniadirEjercicio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAniadirEjercicio)
-                    .addComponent(jbCrearRutina))
+                    .addComponent(jbCrearRutina)
+                    .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAniadirEjercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAniadirEjercicioActionPerformed
-        // TODO add your handling code here:
-        nombreEjercicio = (String) jcbEjercicios.getSelectedItem();
-        eje = new Ejercicios(nombreEjercicio, series);
-        ejerciciosRutina.add(eje);
-        series = new ArrayList();
+        if (series.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No es posible crear un ejercicio sin haber añadido ninguna serie");
+        } else {
+            nombreEjercicio = (String) jcbEjercicios.getSelectedItem();
+            eje = new Ejercicios(nombreEjercicio, series);
+            ejerciciosRutina.add(eje);
+            series = new ArrayList();
+        }
     }//GEN-LAST:event_jbAniadirEjercicioActionPerformed
 
     private void jbCrearRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearRutinaActionPerformed
         try {
-            // TODO add your handling code here:
-            nombreRutina = jtfRutina.getText();
-            gest.crearRutina(ejerciciosRutina, nombreRutina);
-            ejerciciosRutina.clear();
+            if (ejerciciosRutina.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No es posible crear una rutina sin haber añadido ningun ejercicio");
+            } else if (jtfRutina.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe introducir un nombre a la rutina");
+            } else {
+                nombreRutina = jtfRutina.getText();
+                gest.crearRutina(ejerciciosRutina, nombreRutina);
+                ejerciciosRutina.clear();
+            }
 
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCrearRutinaActionPerformed
 
@@ -207,7 +220,6 @@ public class JPPanel2 extends javax.swing.JPanel {
         // TODO add your handling code here:
         repeticiones = (int) jsRepeticiones.getValue();
         rmSer = parseInt((String) jcbRM.getSelectedItem());
-        System.out.println(rmSer);
         ser = new Series(repeticiones, rmSer);
         series.add(ser);
     }//GEN-LAST:event_jbAniadirSerieActionPerformed
@@ -223,9 +235,9 @@ public class JPPanel2 extends javax.swing.JPanel {
             }
             this.jfe.cambiaPanel("p3");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(JPPanel2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbUsarRutinaActionPerformed
 

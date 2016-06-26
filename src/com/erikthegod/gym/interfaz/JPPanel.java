@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class JPPanel extends javax.swing.JPanel {
 
     private JFVentana jfe;
     private double pesoDeseado;
-    Calculator cal = new Calculator();
-    GestorBBDD gest = new GestorBBDD();
+    private Calculator cal = new Calculator();
+    private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
     private ArrayList<Personas> personas = new ArrayList();
 

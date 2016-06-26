@@ -3,7 +3,6 @@ package com.erikthegod.gym.interfaz;
 import com.erikthegod.gym.modelo.Datos;
 import com.erikthegod.gym.modelo.Ejercicios;
 import com.erikthegod.gym.modelo.Personas;
-import com.erikthegod.gym.interfaz.JFVentana;
 import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,17 +16,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class JPPanelEstadisticas extends javax.swing.JPanel {
 
     private JFVentana jfe;
-    Personas per = new Personas();
-    Ejercicios ejer = new Ejercicios();
-    Datos dat = new Datos();
-    GestorBBDD gest = new GestorBBDD();
-    ArrayList<Datos> datos = new ArrayList();
-    ArrayList<Datos> pesos = new ArrayList();
+    private Personas per = new Personas();
+    private Ejercicios ejer = new Ejercicios();
+    private Datos dat = new Datos();
+    private GestorBBDD gest = new GestorBBDD();
+    private ArrayList<Datos> datos = new ArrayList();
+    private ArrayList<Datos> pesos = new ArrayList();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
     private ArrayList<Personas> personas = new ArrayList();
 

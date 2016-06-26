@@ -2,7 +2,7 @@ package com.erikthegod.gym.modelo;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class Rutina {
 

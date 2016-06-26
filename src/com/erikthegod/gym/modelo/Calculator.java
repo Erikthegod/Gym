@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.erikthegod.gym.modelo;
 
 import com.erikthegod.gym.persistencia.GestorBBDD;
@@ -10,7 +5,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class Calculator {
 

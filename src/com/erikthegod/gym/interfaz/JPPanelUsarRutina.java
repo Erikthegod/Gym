@@ -4,7 +4,6 @@ import com.erikthegod.gym.modelo.Calculator;
 import com.erikthegod.gym.modelo.Ejercicios;
 import com.erikthegod.gym.modelo.Personas;
 import com.erikthegod.gym.modelo.Rutina;
-import com.erikthegod.gym.interfaz.JFVentana;
 import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,19 +14,19 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kinton
+ * @author ErikTheGod
  */
 public class JPPanelUsarRutina extends javax.swing.JPanel {
 
     private JFVentana jfe;
-    Vector vNombres;
-    DefaultTableModel dtm;
-    double pesoDeseado;
-    Personas per = new Personas();
-    Ejercicios ejer = new Ejercicios();
-    Rutina rut = new Rutina();
-    Calculator cal = new Calculator();
-    GestorBBDD gest = new GestorBBDD();
+    private Vector vNombres;
+    private DefaultTableModel dtm;
+    private double pesoDeseado;
+    private Personas per = new Personas();
+    private Ejercicios ejer = new Ejercicios();
+    private Rutina rut = new Rutina();
+    private Calculator cal = new Calculator();
+    private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Rutina> nombresRutinas = new ArrayList();
     private ArrayList<Personas> personas = new ArrayList();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
