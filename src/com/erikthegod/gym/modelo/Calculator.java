@@ -86,6 +86,84 @@ public class Calculator {
                 velocidadReal = 0.52;
             }
         }
+        if (ejercicio.compareTo("MediaSentadilla")==0){
+            if (velocidadReal > 1.32) {
+                velocidadReal = 1.35;
+            } else if (velocidadReal > 1.26 && velocidadReal <= 1.32) {
+                velocidadReal = 1.29;
+            } else if (velocidadReal > 1.20 && velocidadReal <= 1.26) {
+                velocidadReal = 1.23;
+            } else if (velocidadReal > 1.14 && velocidadReal <= 1.20) {
+                velocidadReal = 1.17;
+            } else if (velocidadReal > 1.08 && velocidadReal <= 1.14) {
+                velocidadReal = 1.11;
+            } else if (velocidadReal > 1.02 && velocidadReal <= 1.08) {
+                velocidadReal = 1.05;
+            } else if (velocidadReal > 0.96 && velocidadReal <= 1.02) {
+                velocidadReal = 0.99;
+            } else if (velocidadReal > 0.90 && velocidadReal <= 0.96) {
+                velocidadReal = 0.93;
+            } else if (velocidadReal > 0.84 && velocidadReal <= 0.90) {
+                velocidadReal = 0.87;
+            } else if (velocidadReal > 0.78 && velocidadReal <= 0.84) {
+                velocidadReal = 0.81;
+            } else if (velocidadReal > 0.72 && velocidadReal <= 0.78) {
+                velocidadReal = 0.75;
+            } else if (velocidadReal > 0.66 && velocidadReal <= 0.72) {
+                velocidadReal = 0.69;
+            } else if (velocidadReal > 0.60 && velocidadReal <= 0.66) {
+                velocidadReal = 0.63;
+            } else if (velocidadReal > 0.54 && velocidadReal <= 0.60) {
+                velocidadReal = 0.57;
+            } else if (velocidadReal > 0.48 && velocidadReal <= 0.54) {
+                velocidadReal = 0.51;
+            } else if (velocidadReal > 0.42 && velocidadReal <= 0.48) {
+                velocidadReal = 0.45;
+            } else if (velocidadReal > 0.36 && velocidadReal <= 0.42) {
+                velocidadReal = 0.39;
+            } else if (velocidadReal <= 0.36) {
+                velocidadReal = 0.33;
+            }
+        }
+        if (ejercicio.compareTo("Sentadilla")==0){
+            if (velocidadReal > 1.41) {
+                velocidadReal = 1.45;
+            } else if (velocidadReal > 1.35 && velocidadReal <= 1.41) {
+                velocidadReal = 1.38;
+            } else if (velocidadReal > 1.29 && velocidadReal <= 1.35) {
+                velocidadReal = 1.32;
+            } else if (velocidadReal > 1.21 && velocidadReal <= 1.29) {
+                velocidadReal = 1.25;
+            } else if (velocidadReal > 1.15 && velocidadReal <= 1.21) {
+                velocidadReal = 1.18;
+            } else if (velocidadReal > 1.09 && velocidadReal <= 1.15) {
+                velocidadReal = 1.12;
+            } else if (velocidadReal > 1.02 && velocidadReal <= 1.09) {
+                velocidadReal = 1.05;
+            } else if (velocidadReal > 0.96 && velocidadReal <= 1.02) {
+                velocidadReal = 0.99;
+            } else if (velocidadReal > 0.89 && velocidadReal <= 0.96) {
+                velocidadReal = 0.92;
+            } else if (velocidadReal > 0.82 && velocidadReal <= 0.89) {
+                velocidadReal = 0.85;
+            } else if (velocidadReal > 0.76 && velocidadReal <= 0.82) {
+                velocidadReal = 0.79;
+            } else if (velocidadReal > 0.69 && velocidadReal <= 0.76) {
+                velocidadReal = 0.72;
+            } else if (velocidadReal > 0.63 && velocidadReal <= 0.69) {
+                velocidadReal = 0.66;
+            } else if (velocidadReal > 0.56 && velocidadReal <= 0.63) {
+                velocidadReal = 0.59;
+            } else if (velocidadReal > 0.49 && velocidadReal <= 0.56) {
+                velocidadReal = 0.52;
+            } else if (velocidadReal > 0.43 && velocidadReal <= 0.49) {
+                velocidadReal = 0.46;
+            } else if (velocidadReal > 0.36 && velocidadReal <= 0.43) {
+                velocidadReal = 0.39;
+            } else if (velocidadReal <= 0.36) {
+                velocidadReal = 0.33;
+            }
+        }
         return velocidadReal;
     }
 

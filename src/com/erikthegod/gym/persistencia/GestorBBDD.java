@@ -335,4 +335,11 @@ public class GestorBBDD {
         c.close();
         return personas;
     }
+
+    public void registrarPersonas(String persona, String pass) throws SQLException, ClassNotFoundException{
+        conectar();
+        sql = "insert into Personas values ('" + persona + "','" + pass +"');";
+        stmt.executeUpdate(sql);
+        c.close();        
+    }
 }
