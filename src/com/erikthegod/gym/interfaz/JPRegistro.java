@@ -5,6 +5,12 @@
  */
 package com.erikthegod.gym.interfaz;
 
+import com.erikthegod.gym.persistencia.GestorBBDD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kinton
@@ -15,6 +21,8 @@ public class JPRegistro extends javax.swing.JPanel {
      * Creates new form JPRegistro
      */
     private JFVentana jfe;
+    private GestorBBDD gest = new GestorBBDD();
+    private boolean registrado;
     
     public JPRegistro(JFVentana _jfe) {
         initComponents();
@@ -30,10 +38,80 @@ public class JPRegistro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setLayout(new java.awt.BorderLayout());
+        jtfNombre = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jtfPass = new javax.swing.JTextField();
+        jbCrearUsuario = new javax.swing.JButton();
+
+        jLabel1.setText("Usuario");
+
+        jLabel2.setText("Contraseña");
+
+        jbCrearUsuario.setText("Crear Usuario");
+        jbCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbCrearUsuario)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jtfNombre)
+                        .addComponent(jtfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                .addContainerGap(132, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(jbCrearUsuario)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearUsuarioActionPerformed
+        try {
+            registrado = gest.comprobarUsuario(jtfNombre.getText(), jtfPass.getText());
+            if(registrado == false){
+                gest.registrarPersonas(jtfNombre.getText(), jtfPass.getText());
+                this.jfe.cambiaPanel("p1");
+            } else {
+                JOptionPane.showMessageDialog(null,"Usuario ya registrado , pruebe con otro nombre");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JPRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JPRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCrearUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbCrearUsuario;
+    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfPass;
     // End of variables declaration//GEN-END:variables
 }

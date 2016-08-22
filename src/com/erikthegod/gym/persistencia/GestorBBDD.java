@@ -47,6 +47,7 @@ public class GestorBBDD {
     private Rutina nombreRut;
     private Personas per;
     private ArrayList<Personas> personas = new ArrayList();
+    public static Personas usuario;
 
     /**
      * Conecta a la BBDD
@@ -336,10 +337,39 @@ public class GestorBBDD {
         return personas;
     }
 
-    public void registrarPersonas(String persona, String pass) throws SQLException, ClassNotFoundException{
+    public boolean comprobarRegistro(String persona,String pass) throws ClassNotFoundException, SQLException {
         conectar();
-        sql = "insert into Personas values ('" + persona + "','" + pass +"');";
+        boolean registrado = false;
+        sql = "SELECT * from Personas";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            if(persona.compareTo(rs.getString("Nombre"))==0 && pass.compareTo(rs.getString("Pass"))==0){
+                registrado = true;
+                usuario = new Personas (persona,pass);
+            };
+        }
+        c.close();
+        return registrado;
+    }
+    
+    public boolean comprobarUsuario(String persona,String pass) throws ClassNotFoundException, SQLException {
+        conectar();
+        boolean registrado = false;
+        sql = "SELECT * from Personas";
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            if(persona.compareTo(rs.getString("Nombre"))==0){
+                registrado = true;
+            };
+        }
+        c.close();
+        return registrado;
+    }
+
+    public void registrarPersonas(String persona, String pass) throws SQLException, ClassNotFoundException {
+        conectar();
+        sql = "insert into Personas values ('" + persona + "','" + pass + "');";
         stmt.executeUpdate(sql);
-        c.close();        
+        c.close();
     }
 }

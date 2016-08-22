@@ -26,15 +26,16 @@ public class JPPanel extends javax.swing.JPanel {
     public JPPanel(JFVentana _jfe) {
         try {
             initComponents();
-            this.jfe = _jfe;
-            personas = gest.recogerPersonas();
+            this.jfe = _jfe;           
             ejercicios = gest.recogerEjercicios();
             for (int i = 0; i < ejercicios.size(); i++) {
                 jcbEjercicios.addItem(ejercicios.get(i).getNombre());
             }
+            personas = gest.recogerPersonas();
             for (int i = 0; i < personas.size(); i++) {
                 jcbNombre.addItem(personas.get(i).getNombre());
             }
+            
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error conectar");
         }
@@ -188,7 +189,6 @@ public class JPPanel extends javax.swing.JPanel {
 
     private void jbObtenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerActionPerformed
         try {
-            // TODO add your handling code here:
             gest.insertarDato((String) jcbEjercicios.getSelectedItem(), (String) jcbNombre.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
             pesoDeseado = cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
             jlPeso.setText(Double.toString(pesoDeseado));
@@ -200,21 +200,21 @@ public class JPPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jbObtenerActionPerformed
 
     private void jtfPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtfPesoActionPerformed
 
     private void jbCrearRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearRutActionPerformed
-        // TODO add your handling code here:
+
         this.jfe.cambiaPanel("p2");
     }//GEN-LAST:event_jbCrearRutActionPerformed
 
     private void jbUsarRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsarRutinaActionPerformed
-        // TODO add your handling code here:
+
         this.jfe.cambiaPanel("p3");
     }//GEN-LAST:event_jbUsarRutinaActionPerformed
 
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
-        // TODO add your handling code here:
+
         this.jfe.cambiaPanel("p4");
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
