@@ -21,21 +21,16 @@ public class JPPanel extends javax.swing.JPanel {
     private Calculator cal = new Calculator();
     private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
-    private ArrayList<Personas> personas = new ArrayList();
+    
 
     public JPPanel(JFVentana _jfe) {
         try {
             initComponents();
-            this.jfe = _jfe;           
+            this.jfe = _jfe;
             ejercicios = gest.recogerEjercicios();
             for (int i = 0; i < ejercicios.size(); i++) {
                 jcbEjercicios.addItem(ejercicios.get(i).getNombre());
-            }
-            personas = gest.recogerPersonas();
-            for (int i = 0; i < personas.size(); i++) {
-                jcbNombre.addItem(personas.get(i).getNombre());
-            }
-            
+            }          
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error conectar");
         }
@@ -60,6 +55,12 @@ public class JPPanel extends javax.swing.JPanel {
         jlPesoDeseado = new javax.swing.JLabel();
         jlPeso = new javax.swing.JLabel();
 
+        jcbEjercicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEjerciciosActionPerformed(evt);
+            }
+        });
+
         jbObtener.setText("Obtener");
         jbObtener.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +71,12 @@ public class JPPanel extends javax.swing.JPanel {
         jtfPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPesoActionPerformed(evt);
+            }
+        });
+
+        jcbNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNombreActionPerformed(evt);
             }
         });
 
@@ -189,9 +196,15 @@ public class JPPanel extends javax.swing.JPanel {
 
     private void jbObtenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerActionPerformed
         try {
-            gest.insertarDato((String) jcbEjercicios.getSelectedItem(), (String) jcbNombre.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
-            pesoDeseado = cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
-            jlPeso.setText(Double.toString(pesoDeseado));
+            if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                gest.insertarDato((String) jcbEjercicios.getSelectedItem(), (String) jcbNombre.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
+                pesoDeseado = cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), (String) jcbNombre.getSelectedItem());
+                jlPeso.setText(Double.toString(pesoDeseado));
+            } else {
+                gest.insertarDato((String) jcbEjercicios.getSelectedItem(), gest.usuario.getNombre(), jtfPeso.getText(), jtfSegundos.getText());
+                pesoDeseado = cal.calculoTotal((String) jcbEjercicios.getSelectedItem(), jtfSegundos.getText(), jtfPeso.getText(), (int) jsRM.getValue(), gest.usuario.getNombre());
+                jlPeso.setText(Double.toString(pesoDeseado));
+            }
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error");
         } catch (SQLException ex) {
@@ -218,6 +231,14 @@ public class JPPanel extends javax.swing.JPanel {
         this.jfe.cambiaPanel("p4");
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
+    private void jcbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNombreActionPerformed
+
+    }//GEN-LAST:event_jcbNombreActionPerformed
+
+    private void jcbEjerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEjerciciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEjerciciosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -226,7 +247,7 @@ public class JPPanel extends javax.swing.JPanel {
     private javax.swing.JButton jbObtener;
     private javax.swing.JButton jbUsarRutina;
     private javax.swing.JComboBox<String> jcbEjercicios;
-    private javax.swing.JComboBox<String> jcbNombre;
+    protected static javax.swing.JComboBox<String> jcbNombre;
     private javax.swing.JLabel jlPeso;
     private javax.swing.JLabel jlPesoDeseado;
     private javax.swing.JLabel jlPesoUsado;

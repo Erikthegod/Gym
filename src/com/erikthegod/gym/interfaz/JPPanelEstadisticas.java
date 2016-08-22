@@ -28,21 +28,10 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
     private ArrayList<Datos> datos = new ArrayList();
     private ArrayList<Datos> pesos = new ArrayList();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
-    private ArrayList<Personas> personas = new ArrayList();
 
     public JPPanelEstadisticas(JFVentana _jfe) {
-        try {
-            initComponents();
-            this.jfe = _jfe;
-            personas = gest.recogerPersonas();
-            for (int i = 0; i < personas.size(); i++) {
-                jcbPersona.addItem(personas.get(i).getNombre());
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPPanelEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(JPPanelEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initComponents();
+        this.jfe = _jfe;
     }
 
     @SuppressWarnings("unchecked")
@@ -123,7 +112,11 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
 
         try {
             DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-            datos = gest.recogerDatos((String) jcbPersona.getSelectedItem(), (String) jcbEjercicio.getSelectedItem(), (String) jcbPeso.getSelectedItem());
+            if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                datos = gest.recogerDatos((String) jcbPersona.getSelectedItem(), (String) jcbEjercicio.getSelectedItem(), (String) jcbPeso.getSelectedItem());
+            } else {
+                datos = gest.recogerDatos(gest.usuario.getNombre(), (String) jcbEjercicio.getSelectedItem(), (String) jcbPeso.getSelectedItem());
+            }
             for (int i = 0; i < datos.size(); i++) {
                 line_chart_dataset.addValue(datos.get(i).getVelocidad(), "velocidad", datos.get(i).getFecha());
             }
@@ -148,7 +141,9 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
         try {
             ejercicios = new ArrayList();
             jcbEjercicio.removeAllItems();
-            ejercicios = gest.recogerEjerciciosPesona((String) jcbPersona.getSelectedItem());
+            if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                ejercicios = gest.recogerEjerciciosPesona((String) jcbPersona.getSelectedItem());
+            }
             for (int i = 0; i < ejercicios.size(); i++) {
                 jcbEjercicio.addItem(ejercicios.get(i).getNombre());
             }
@@ -163,7 +158,11 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             jcbPeso.removeAllItems();
-            pesos = gest.recogerPesos((String) jcbPersona.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
+            if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                pesos = gest.recogerPesos((String) jcbPersona.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
+            } else {
+                pesos = gest.recogerPesos(gest.usuario.getNombre(), (String) jcbEjercicio.getSelectedItem());
+            }
             for (int i = 0; i < pesos.size(); i++) {
                 jcbPeso.addItem(pesos.get(i).getPeso());
             }
@@ -183,8 +182,8 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbGenerar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbEjercicio;
-    private javax.swing.JComboBox<String> jcbPersona;
+    protected static javax.swing.JComboBox<String> jcbEjercicio;
+    protected static javax.swing.JComboBox<String> jcbPersona;
     private javax.swing.JComboBox<String> jcbPeso;
     // End of variables declaration//GEN-END:variables
 }

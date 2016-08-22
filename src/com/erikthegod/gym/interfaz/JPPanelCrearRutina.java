@@ -195,6 +195,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
             nombreEjercicio = (String) jcbEjercicios.getSelectedItem();
             eje = new Ejercicios(nombreEjercicio, series);
             ejerciciosRutina.add(eje);
+            JOptionPane.showMessageDialog(null, "Ejercicio añadido");
             series = new ArrayList();
         }
     }//GEN-LAST:event_jbAniadirEjercicioActionPerformed
@@ -209,6 +210,8 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
                 nombreRutina = jtfRutina.getText();
                 gest.crearRutina(ejerciciosRutina, nombreRutina);
                 ejerciciosRutina.clear();
+                series = new ArrayList();
+                JOptionPane.showMessageDialog(null, "Rutina creada");
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
@@ -222,6 +225,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
         rmSer = parseInt((String) jcbRM.getSelectedItem());
         ser = new Series(repeticiones, rmSer);
         series.add(ser);
+        JOptionPane.showMessageDialog(null, "Serie añadida");
     }//GEN-LAST:event_jbAniadirSerieActionPerformed
 
     private void jbUsarRutinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsarRutinaActionPerformed

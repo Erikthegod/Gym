@@ -1,12 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.erikthegod.gym.interfaz;
 
+import static com.erikthegod.gym.interfaz.JPPanelEstadisticas.jcbEjercicio;
+import com.erikthegod.gym.modelo.Ejercicios;
+import com.erikthegod.gym.modelo.Personas;
 import com.erikthegod.gym.persistencia.GestorBBDD;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,12 +19,15 @@ public class JPPanelIniciarSesion extends javax.swing.JPanel {
 
     private JFVentana jfe;
     private GestorBBDD gest = new GestorBBDD();
-    Boolean registrado;
-    
+    private Boolean registrado;
+    private ArrayList<Personas> personas = new ArrayList();
+    private ArrayList<Ejercicios> ejercicios = new ArrayList();
+
     public JPPanelIniciarSesion(JFVentana _jfe) {
         initComponents();
         this.jfe = _jfe;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,11 +90,31 @@ public class JPPanelIniciarSesion extends javax.swing.JPanel {
     private void jbIniciaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIniciaSesionActionPerformed
         try {
             registrado = gest.comprobarRegistro(jtfNombre.getText(), jtfPass.getText());
-            if(registrado == true){
+            if (registrado == true) {
+                if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                    personas = gest.recogerPersonas();
+                    for (int i = 0; i < personas.size(); i++) {
+                        JPPanel.jcbNombre.addItem(personas.get(i).getNombre());
+                        JPPanelUsarRutina.jcbPersona.addItem(personas.get(i).getNombre());
+                        JPPanelEstadisticas.jcbPersona.addItem(personas.get(i).getNombre());
+
+                    }
+                } else {
+                    JPPanel.jcbNombre.setVisible(false);
+                    JPPanelUsarRutina.jcbPersona.setVisible(false);
+                    JPPanelEstadisticas.jcbPersona.setVisible(false);
+                    ejercicios = new ArrayList();
+                    JPPanelEstadisticas.jcbEjercicio.removeAllItems();
+                    ejercicios = gest.recogerEjerciciosPesona(gest.usuario.getNombre());
+                    for (int i = 0; i < ejercicios.size(); i++) {
+                        jcbEjercicio.addItem(ejercicios.get(i).getNombre());
+                    }
+                }
                 this.jfe.cambiaPanel("p1");
             } else {
-                JOptionPane.showMessageDialog(null,"Error al iniciar sesion");
+                JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
             }
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPPanelIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

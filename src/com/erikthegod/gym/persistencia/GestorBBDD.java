@@ -360,6 +360,7 @@ public class GestorBBDD {
         while (rs.next()) {
             if(persona.compareTo(rs.getString("Nombre"))==0){
                 registrado = true;
+                usuario = new Personas (persona,pass);
             };
         }
         c.close();

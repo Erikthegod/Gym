@@ -28,7 +28,6 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
     private Calculator cal = new Calculator();
     private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Rutina> nombresRutinas = new ArrayList();
-    private ArrayList<Personas> personas = new ArrayList();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
 
     public JPPanelUsarRutina(JFVentana _jfe) {
@@ -46,10 +45,6 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
             nombresRutinas = gest.recogerNombreRutina();
             for (int i = 0; i < nombresRutinas.size(); i++) {
                 jcbRutina.addItem(nombresRutinas.get(i).getNombre());
-            }
-            personas = gest.recogerPersonas();
-            for (int i = 0; i < personas.size(); i++) {
-                jcbPersona.addItem(personas.get(i).getNombre());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPPanelUsarRutina.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,20 +173,35 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
 
     private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
         try {
-            // TODO add your handling code here:
-            gest.insertarDato((String) jcbEjercicio.getSelectedItem(), (String) jcbPersona.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
-            dtm = new DefaultTableModel(vNombres, 0);
-            jtSeries.setModel(dtm);
-            ejer = gest.recogerEjercicioRutina((String) jcbRutina.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
-            for (int i = 0; i < ejer.getSeries().size(); i++) {
-                pesoDeseado = cal.calculoTotal(ejer.getNombre(), jtfSegundos.getText(), jtfPeso.getText(), ejer.getSeries().get(i).getRmSerie(), (String) jcbPersona.getSelectedItem());
-                dtm.setRowCount(dtm.getRowCount() + 1);
-                jtSeries.setValueAt(i + 1, i, 0);
-                jtSeries.setValueAt(ejer.getSeries().get(i).getRmSerie(), i, 1);
-                jtSeries.setValueAt(ejer.getSeries().get(i).getRepeticiones(), i, 2);
-                jtSeries.setValueAt(pesoDeseado, i, 3);
+            if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+                gest.insertarDato((String) jcbEjercicio.getSelectedItem(), (String) jcbPersona.getSelectedItem(), jtfPeso.getText(), jtfSegundos.getText());
+                dtm = new DefaultTableModel(vNombres, 0);
+                jtSeries.setModel(dtm);
+                ejer = gest.recogerEjercicioRutina((String) jcbRutina.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
+                for (int i = 0; i < ejer.getSeries().size(); i++) {
+                    pesoDeseado = cal.calculoTotal(ejer.getNombre(), jtfSegundos.getText(), jtfPeso.getText(), ejer.getSeries().get(i).getRmSerie(), (String) jcbPersona.getSelectedItem());
+                    dtm.setRowCount(dtm.getRowCount() + 1);
+                    jtSeries.setValueAt(i + 1, i, 0);
+                    jtSeries.setValueAt(ejer.getSeries().get(i).getRmSerie(), i, 1);
+                    jtSeries.setValueAt(ejer.getSeries().get(i).getRepeticiones(), i, 2);
+                    jtSeries.setValueAt(pesoDeseado, i, 3);
+                }
+                ejer.getSeries().clear();
+            } else {
+                gest.insertarDato((String) jcbEjercicio.getSelectedItem(), gest.usuario.getNombre(), jtfPeso.getText(), jtfSegundos.getText());
+                dtm = new DefaultTableModel(vNombres, 0);
+                jtSeries.setModel(dtm);
+                ejer = gest.recogerEjercicioRutina((String) jcbRutina.getSelectedItem(), (String) jcbEjercicio.getSelectedItem());
+                for (int i = 0; i < ejer.getSeries().size(); i++) {
+                    pesoDeseado = cal.calculoTotal(ejer.getNombre(), jtfSegundos.getText(), jtfPeso.getText(), ejer.getSeries().get(i).getRmSerie(), gest.usuario.getNombre());
+                    dtm.setRowCount(dtm.getRowCount() + 1);
+                    jtSeries.setValueAt(i + 1, i, 0);
+                    jtSeries.setValueAt(ejer.getSeries().get(i).getRmSerie(), i, 1);
+                    jtSeries.setValueAt(ejer.getSeries().get(i).getRepeticiones(), i, 2);
+                    jtSeries.setValueAt(pesoDeseado, i, 3);
+                }
+                ejer.getSeries().clear();
             }
-            ejer.getSeries().clear();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(JPPanelUsarRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -226,7 +236,7 @@ public class JPPanelUsarRutina extends javax.swing.JPanel {
     private javax.swing.JButton jbCalcular;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbEjercicio;
-    private javax.swing.JComboBox<String> jcbPersona;
+    protected static javax.swing.JComboBox<String> jcbPersona;
     protected static javax.swing.JComboBox<String> jcbRutina;
     private javax.swing.JTable jtSeries;
     private javax.swing.JTextField jtfPeso;

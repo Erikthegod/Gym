@@ -5,6 +5,7 @@
  */
 package com.erikthegod.gym.interfaz;
 
+import com.erikthegod.gym.modelo.Personas;
 import java.awt.CardLayout;
 
 /**
@@ -25,14 +26,12 @@ public class JFVentana extends javax.swing.JFrame {
 
     public JFVentana() {
         initComponents();
-        this.setTitle("KintAPP");
         this.getContentPane().add(panelInicioSesion, "p6");
         this.getContentPane().add(panel, "p1");
         this.getContentPane().add(panel2, "p2");
         this.getContentPane().add(panel3, "p3");
         this.getContentPane().add(panel4, "p4");
         this.getContentPane().add(panelRegistro, "p5");
-        
         setBounds(100, 100, 600, 600);
         setVisible(true);
     }
