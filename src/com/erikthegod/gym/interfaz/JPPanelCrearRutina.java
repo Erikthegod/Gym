@@ -212,6 +212,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
                 ejerciciosRutina.clear();
                 series = new ArrayList();
                 JOptionPane.showMessageDialog(null, "Rutina creada");
+                jtfRutina.setText("");
             }
 
         } catch (SQLException | ClassNotFoundException ex) {

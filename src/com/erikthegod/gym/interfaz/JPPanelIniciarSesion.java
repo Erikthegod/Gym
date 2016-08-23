@@ -103,6 +103,8 @@ public class JPPanelIniciarSesion extends javax.swing.JPanel {
                     JPPanel.jcbNombre.setVisible(false);
                     JPPanelUsarRutina.jcbPersona.setVisible(false);
                     JPPanelEstadisticas.jcbPersona.setVisible(false);
+                    JPPanelUsarRutina.jlUsuario.setText(gest.usuario.getNombre());
+                    JPPanel.jlUsuario.setText(gest.usuario.getNombre());
                     ejercicios = new ArrayList();
                     JPPanelEstadisticas.jcbEjercicio.removeAllItems();
                     ejercicios = gest.recogerEjerciciosPesona(gest.usuario.getNombre());

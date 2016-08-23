@@ -15,10 +15,10 @@
             <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JFVentana.java</file>
             <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanelUsarRutina.java</file>
             <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanel.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanelCrearRutina.java</file>
             <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPRegistro.java</file>
-            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/persistencia/GestorBBDD.java</file>
             <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanelIniciarSesion.java</file>
-            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanelEstadisticas.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/persistencia/GestorBBDD.java</file>
         </group>
     </open-files>
 </project-private>

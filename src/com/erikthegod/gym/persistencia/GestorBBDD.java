@@ -337,6 +337,14 @@ public class GestorBBDD {
         return personas;
     }
 
+    /**
+     * Metodo que comprueba que el login es correcto
+     * @param persona
+     * @param pass
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public boolean comprobarRegistro(String persona,String pass) throws ClassNotFoundException, SQLException {
         conectar();
         boolean registrado = false;
@@ -346,12 +354,20 @@ public class GestorBBDD {
             if(persona.compareTo(rs.getString("Nombre"))==0 && pass.compareTo(rs.getString("Pass"))==0){
                 registrado = true;
                 usuario = new Personas (persona,pass);
-            };
+            }
         }
         c.close();
         return registrado;
     }
     
+    /**
+     * Metodo que comprueba si un usuario ya esta registrado
+     * @param persona
+     * @param pass
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public boolean comprobarUsuario(String persona,String pass) throws ClassNotFoundException, SQLException {
         conectar();
         boolean registrado = false;
@@ -360,13 +376,19 @@ public class GestorBBDD {
         while (rs.next()) {
             if(persona.compareTo(rs.getString("Nombre"))==0){
                 registrado = true;
-                usuario = new Personas (persona,pass);
-            };
+            }
         }
         c.close();
         return registrado;
     }
 
+    /**
+     * Metodo que registra nuevos usuarios
+     * @param persona
+     * @param pass
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public void registrarPersonas(String persona, String pass) throws SQLException, ClassNotFoundException {
         conectar();
         sql = "insert into Personas values ('" + persona + "','" + pass + "');";

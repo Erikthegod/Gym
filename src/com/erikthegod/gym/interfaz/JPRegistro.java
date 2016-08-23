@@ -5,8 +5,13 @@
  */
 package com.erikthegod.gym.interfaz;
 
+import static com.erikthegod.gym.interfaz.JPPanelEstadisticas.jcbEjercicio;
+import com.erikthegod.gym.modelo.Ejercicios;
+import com.erikthegod.gym.modelo.Personas;
 import com.erikthegod.gym.persistencia.GestorBBDD;
+import static com.erikthegod.gym.persistencia.GestorBBDD.usuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,7 +28,8 @@ public class JPRegistro extends javax.swing.JPanel {
     private JFVentana jfe;
     private GestorBBDD gest = new GestorBBDD();
     private boolean registrado;
-    
+    private ArrayList<Ejercicios> ejercicios = new ArrayList();
+
     public JPRegistro(JFVentana _jfe) {
         initComponents();
         this.jfe = _jfe;
@@ -91,12 +97,29 @@ public class JPRegistro extends javax.swing.JPanel {
 
     private void jbCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearUsuarioActionPerformed
         try {
-            registrado = gest.comprobarUsuario(jtfNombre.getText(), jtfPass.getText());
-            if(registrado == false){
-                gest.registrarPersonas(jtfNombre.getText(), jtfPass.getText());
-                this.jfe.cambiaPanel("p1");
+            if (jtfNombre.getText().compareTo("")!=0 && jtfPass.getText().compareTo("")!=0) {
+                registrado = gest.comprobarUsuario(jtfNombre.getText(), jtfPass.getText());
+                if (registrado == false) {
+                    usuario = new Personas (jtfNombre.getText(), jtfPass.getText());
+                    JPPanel.jcbNombre.setVisible(false);
+                    JPPanelUsarRutina.jcbPersona.setVisible(false);
+                    JPPanelEstadisticas.jcbPersona.setVisible(false);
+                    JPPanelUsarRutina.jlUsuario.setText(gest.usuario.getNombre());
+                    JPPanel.jlUsuario.setText(gest.usuario.getNombre());
+                    ejercicios = new ArrayList();
+                    JPPanelEstadisticas.jcbEjercicio.removeAllItems();
+                    ejercicios = gest.recogerEjerciciosPesona(gest.usuario.getNombre());
+                    for (int i = 0; i < ejercicios.size(); i++) {
+                        jcbEjercicio.addItem(ejercicios.get(i).getNombre());
+                    }
+                    gest.registrarPersonas(jtfNombre.getText(), jtfPass.getText());
+                    this.jfe.cambiaPanel("p1");
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario ya registrado , pruebe con otro nombre");
+                }
             } else {
-                JOptionPane.showMessageDialog(null,"Usuario ya registrado , pruebe con otro nombre");
+                 JOptionPane.showMessageDialog(null, "Es necesario rellenar los campos");
             }
             
         } catch (SQLException ex) {
