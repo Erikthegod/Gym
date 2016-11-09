@@ -21,7 +21,13 @@ public class Calculator {
         RM = gest.recogerRM(ejercicio, velocidad);
         return calcularPeso(rm, RM, peso);
     }
-
+    
+    public double rmUsado (String ejercicio, String segundos, String peso,String persona) throws SQLException, ClassNotFoundException{
+        metros = gest.recogerMetros(ejercicio, persona);
+        velocidad = compararEjercicio(ejercicio, gest.calcularVelocidad(metros, segundos));
+        RM = gest.recogerRM(ejercicio, velocidad);
+        return RM;
+    }
     /**
      * Calcula el peso del rm deseado con un rm dado y el peso de ese rm dado
      *

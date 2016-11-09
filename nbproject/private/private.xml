@@ -11,6 +11,16 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Calculator.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Rutina.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Series.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Datos.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPPanel.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Ejercicios.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/modelo/Personas.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/interfaz/JPRegistro.java</file>
+            <file>file:/C:/Users/kinton/Documents/NetBeansProjects/Gym/src/com/erikthegod/gym/persistencia/GestorBBDD.java</file>
+        </group>
     </open-files>
 </project-private>
