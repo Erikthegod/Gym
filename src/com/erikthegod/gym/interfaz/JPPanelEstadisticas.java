@@ -44,6 +44,7 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
         jcbEjercicio = new javax.swing.JComboBox<>();
         jcbPeso = new javax.swing.JComboBox<>();
         jbSalir = new javax.swing.JButton();
+        jlUsuario = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -88,19 +89,25 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jbSalir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jbGenerar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcbPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGap(72, 72, 72)
                 .addComponent(jbSalir)
                 .addGap(63, 63, 63))
         );
@@ -185,5 +192,6 @@ public class JPPanelEstadisticas extends javax.swing.JPanel {
     protected static javax.swing.JComboBox<String> jcbEjercicio;
     protected static javax.swing.JComboBox<String> jcbPersona;
     private javax.swing.JComboBox<String> jcbPeso;
+    protected static javax.swing.JLabel jlUsuario;
     // End of variables declaration//GEN-END:variables
 }

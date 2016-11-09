@@ -47,9 +47,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
             for (int i = 0; i < ejercicios.size(); i++) {
                 jcbEjercicios.addItem(ejercicios.get(i).getNombre());
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -70,6 +68,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jbAniadirSerie = new javax.swing.JButton();
         jbUsarRutina = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         jbCrearRutina.setText("Crear Rutina");
         jbCrearRutina.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +105,13 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
         jbUsarRutina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbUsarRutinaActionPerformed(evt);
+            }
+        });
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -155,8 +161,13 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
                         .addGap(28, 28, 28))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(158, 158, 158))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(158, 158, 158))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbSalir)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +195,9 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCrearRutina)
                     .addComponent(jtfRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSalir)
+                .addGap(9, 9, 9))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -239,12 +252,14 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
                 JPPanelUsarRutina.jcbRutina.addItem(nombresRutinas.get(i).getNombre());
             }
             this.jfe.cambiaPanel("p3");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(JPPanelCrearRutina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbUsarRutinaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.jfe.cambiaPanel("p1");
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -255,6 +270,7 @@ public class JPPanelCrearRutina extends javax.swing.JPanel {
     private javax.swing.JButton jbAniadirEjercicio;
     private javax.swing.JButton jbAniadirSerie;
     private javax.swing.JButton jbCrearRutina;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbUsarRutina;
     private javax.swing.JComboBox<String> jcbEjercicios;
     private javax.swing.JComboBox<String> jcbRM;

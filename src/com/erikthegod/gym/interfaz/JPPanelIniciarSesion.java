@@ -97,7 +97,6 @@ public class JPPanelIniciarSesion extends javax.swing.JPanel {
                         JPPanel.jcbNombre.addItem(personas.get(i).getNombre());
                         JPPanelUsarRutina.jcbPersona.addItem(personas.get(i).getNombre());
                         JPPanelEstadisticas.jcbPersona.addItem(personas.get(i).getNombre());
-
                     }
                 } else {
                     JPPanel.jcbNombre.setVisible(false);
@@ -105,12 +104,7 @@ public class JPPanelIniciarSesion extends javax.swing.JPanel {
                     JPPanelEstadisticas.jcbPersona.setVisible(false);
                     JPPanelUsarRutina.jlUsuario.setText(gest.usuario.getNombre());
                     JPPanel.jlUsuario.setText(gest.usuario.getNombre());
-                    ejercicios = new ArrayList();
-                    JPPanelEstadisticas.jcbEjercicio.removeAllItems();
-                    ejercicios = gest.recogerEjerciciosPesona(gest.usuario.getNombre());
-                    for (int i = 0; i < ejercicios.size(); i++) {
-                        jcbEjercicio.addItem(ejercicios.get(i).getNombre());
-                    }
+                    JPPanelEstadisticas.jlUsuario.setText(gest.usuario.getNombre());
                 }
                 this.jfe.cambiaPanel("p1");
             } else {

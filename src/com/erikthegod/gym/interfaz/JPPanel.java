@@ -1,5 +1,6 @@
 package com.erikthegod.gym.interfaz;
 
+import static com.erikthegod.gym.interfaz.JPPanelEstadisticas.jcbEjercicio;
 import com.erikthegod.gym.modelo.Calculator;
 import com.erikthegod.gym.modelo.Ejercicios;
 import com.erikthegod.gym.modelo.Personas;
@@ -21,7 +22,6 @@ public class JPPanel extends javax.swing.JPanel {
     private Calculator cal = new Calculator();
     private GestorBBDD gest = new GestorBBDD();
     private ArrayList<Ejercicios> ejercicios = new ArrayList();
-    
 
     public JPPanel(JFVentana _jfe) {
         try {
@@ -30,7 +30,7 @@ public class JPPanel extends javax.swing.JPanel {
             ejercicios = gest.recogerEjercicios();
             for (int i = 0; i < ejercicios.size(); i++) {
                 jcbEjercicios.addItem(ejercicios.get(i).getNombre());
-            }          
+            }
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error conectar");
         }
@@ -231,7 +231,25 @@ public class JPPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jbUsarRutinaActionPerformed
 
     private void jbEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadisticasActionPerformed
-
+        ejercicios = new ArrayList();//Creamos nuevo array de ejercicios para meter en el los ejercicios correspondientes al usuario registrado, se actualiza el panel estadisticas cada vez que se introduce un dato
+        JPPanelEstadisticas.jcbEjercicio.removeAllItems();
+        if (gest.usuario.getNombre().compareTo("Entrenador") == 0 && gest.usuario.getPass().compareTo("Entrenador") == 0) {
+            try {
+                ejercicios = gest.recogerEjerciciosPesona((String) jcbNombre.getSelectedItem());
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(JPPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                ejercicios = gest.recogerEjerciciosPesona(GestorBBDD.usuario.getNombre());
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(JPPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        for (int i = 0; i < ejercicios.size(); i++) {
+            JPPanelEstadisticas.jcbEjercicio.addItem(ejercicios.get(i).getNombre());
+        }
+        ejercicios.clear();
         this.jfe.cambiaPanel("p4");
     }//GEN-LAST:event_jbEstadisticasActionPerformed
 
