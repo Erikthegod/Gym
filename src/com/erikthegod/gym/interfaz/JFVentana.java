@@ -32,7 +32,7 @@ public class JFVentana extends javax.swing.JFrame {
         this.getContentPane().add(panel3, "p3");
         this.getContentPane().add(panel4, "p4");
         this.getContentPane().add(panelRegistro, "p5");
-        setBounds(100, 100, 600, 600);
+        setBounds(100, 100, 600, 500);
         setVisible(true);
     }
 

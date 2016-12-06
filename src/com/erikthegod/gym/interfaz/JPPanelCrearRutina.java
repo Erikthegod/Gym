@@ -9,7 +9,6 @@ import com.erikthegod.gym.modelo.Ejercicios;
 import com.erikthegod.gym.modelo.Rutina;
 import com.erikthegod.gym.modelo.Series;
 import com.erikthegod.gym.persistencia.GestorBBDD;
-import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
